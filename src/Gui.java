@@ -28,6 +28,7 @@ public class Gui extends JFrame {
     }
 
     private void formulario() {
+        //*************************** Conponentes del formulario **************************************************************
         JPanel panelFormulario = new JPanel(new GridBagLayout());
         panelFormulario.setBackground(Color.LIGHT_GRAY);
         this.getContentPane().add(panelFormulario);
@@ -78,6 +79,13 @@ public class Gui extends JFrame {
         grid.gridy = 2;
         panelFormulario.add(listadoDeOpciones, grid);
 
+        JLabel etiquetaSalas= new JLabel("Salas");
+        etiquetaSalas.setFont(new Font("Roboto", Font.PLAIN, 18));
+        etiquetaSalas.setForeground(Color.BLACK);
+        grid.gridx=0;
+        grid.gridy=3;
+        panelFormulario.add(etiquetaSalas,grid);
+
         JButton botonEnviar = new JButton();
         botonEnviar.setText("Enviar");
         botonEnviar.setFont(new Font("Roboto", Font.BOLD, 18));
@@ -87,5 +95,13 @@ public class Gui extends JFrame {
         grid.gridy = 3;
         panelFormulario.add(botonEnviar, grid);
 
+        //***************************************Boton Mostrar************************************************ */
+        JButton botonMostrar= new JButton("Mostrar Datos");
+        botonMostrar.setBackground(Color.GREEN);
+        botonMostrar.setFont(new Font("Roboto",Font.PLAIN, 18));
+        botonMostrar.setForeground(Color.WHITE);
+        grid.gridx=1;
+        grid.gridy=5;
+        panelFormulario.add(botonMostrar,grid);
     }
 }
