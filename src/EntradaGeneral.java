@@ -8,6 +8,12 @@ public class EntradaGeneral extends Entrada {
         // TODO Auto-generated method stub
         return 0;
     }
+    @Override
+    public void generarAsiento() {
+        // TODO Auto-generated method stub
+        
+    }
+
     
     
 }
