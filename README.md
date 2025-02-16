@@ -9,6 +9,9 @@ El área de trabajo contiene dos carpetas de forma predeterminada, donde:
 - `src`: La carpeta para mantener los archivos del código fuente
 - `lib`: La carpeta para mantener las dependencias
 
-Mientras tanto,  los archivos de salida compilados se generarán en la carpeta de forma predeterminada.`bin`
+Mientras tanto,  los archivos de salida compilados se generarán en la carpeta de forma predeterminada.`bin`.
+
+Si desea ver los Requirimientos del programa.
+[Requerimientos](md/Requerimientos.md)
 
 > If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
