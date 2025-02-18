@@ -6,14 +6,9 @@ public EntradaVip(String tipo, String asiento, double precio){
 
 @Override
 public double calcularPrecio() {
-    // TODO Auto-generated method stub
-    return 0;
+    return precio*0/100;
 }
-@Override
-public void generarAsiento() {
-    // TODO Auto-generated method stub
-    
-}
+
 
 
     
