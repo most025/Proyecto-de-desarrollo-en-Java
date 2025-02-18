@@ -6,7 +6,7 @@ public EntradaVip(String tipo, String asiento, double precio){
 
 @Override
 public double calcularPrecio() {
-    return precio*0/100;
+    return precio*20/100;
 }
 
 
