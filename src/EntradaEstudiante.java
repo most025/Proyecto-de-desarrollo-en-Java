@@ -1,12 +1,12 @@
 public class EntradaEstudiante extends EntradaGeneral {
 
-    public EntradaEstudiante(String tipo, String asiento, double precio) {
-        super(tipo, asiento, precio);
+    public EntradaEstudiante(String tipo, String asiento) {
+        super(tipo, asiento);
     }
     //metodo heredado de la clase Entrada General.
     @Override
     public double calcularPrecio() {
-    return precio*40/100;
+    return PRECIO*40/100;
     
 }
 }
