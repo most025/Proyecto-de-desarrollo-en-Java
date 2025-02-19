@@ -6,7 +6,7 @@ public class EntradaEstudiante extends EntradaGeneral {
     //metodo heredado de la clase Entrada General.
     @Override
     public double calcularPrecio() {
-    return PRECIO*40/100;
+    return PRECIO-(PRECIO*60/100);
     
 }
 }

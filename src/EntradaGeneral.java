@@ -5,6 +5,6 @@ public class EntradaGeneral extends Entrada {
     }
     @Override
     public double calcularPrecio() {
-        return PRECIO*10/100;
+        return PRECIO;
     } 
 }
