@@ -33,3 +33,25 @@
       - Confirmar compra.
       - Generar entrada con número de asiento.
 
+
+
+ 2. Funcionalidades Mínimas.
+
+    - Registro de clientes con nombre y edad.
+    - Selección de tipo de entrada (General color verde o VIP color amarillo) y subtipo (Estudiantes color celeste).
+    - Cálculo del precio final aplicando descuentos basados en el tipo de entrada. (Precio de entrada base: $ 1.600)
+    - Utilizar arreglo bidimensional para asignación de asiento.
+    - Confirmación de la compra con un resumen visual.
+
+3.Detalles del diseño.
+
+  - **Atributos sugeridos:**
+
+      - En Entrada: tipo, precioBase, numeroAsiento.
+      - En Persona: nombre, edad.
+  - **Métodos sugeridos:**
+      
+      - `calcularPrecio()` en Entrada.
+      - `generarAsiento()` en Entrada.
+      - Métodos específicos en las subclases para calcular descuentos.
+- Implementar clases concretas como EntradaGeneral y Entrada VIP con lógicas distintas.
