@@ -103,5 +103,11 @@ public class Gui extends JFrame {
         grid.gridx=1;
         grid.gridy=5;
         panelFormulario.add(botonMostrar,grid);
+        //**************************************EVENTOS**************************************************************** */
+
+        
     }
+    // private void GuardarDatos(){
+    
+    // }
 }
