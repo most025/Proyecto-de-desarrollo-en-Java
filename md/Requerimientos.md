@@ -1,4 +1,4 @@
-# Requirimienntos Tecnicos del programa.
+# Requirimientos Técnicos del programa.
 
 1.  Requirimientos técnicos:
 
@@ -55,3 +55,10 @@
       - `generarAsiento()` en Entrada.
       - Métodos específicos en las subclases para calcular descuentos.
 - Implementar clases concretas como EntradaGeneral y Entrada VIP con lógicas distintas.
+
+
+4. **Interfaz Gráfica (mínimos):**
+  
+    - **Formularios:** Campos para ingresar nombre, edad y Seleccionar el tipo de entrada.
+    - **Botones:** Para calcular el precio ( muestra por pantalla el precio) y confirmar la compra ( genera el boleto).
+    - **Salida:** Mostrar el cuadro e diálogo con los datos de la compra.
