@@ -4,15 +4,25 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+//import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Gui extends JFrame {
+    /******************************************Variables Globales**************************************************** */
+    //private ArrayList<Persona> personas;
+    private JTextField campoNombre;
+    private JTextField campoEdad;
+    private JComboBox<String> listadoDeOpciones;
+
     public Gui() {
         this.setSize(600, 400);
         this.setTitle("Sistema de entrada de cine");
@@ -28,7 +38,7 @@ public class Gui extends JFrame {
     }
 
     private void formulario() {
-        //*************************** Conponentes del formulario **************************************************************
+        // *************************** Conponentes del formulario **************************************************************
         JPanel panelFormulario = new JPanel(new GridBagLayout());
         panelFormulario.setBackground(Color.LIGHT_GRAY);
         this.getContentPane().add(panelFormulario);
@@ -37,7 +47,6 @@ public class Gui extends JFrame {
         grid.insets = new Insets(10, 10, 10, 10); // este metodo añade un padding.
         grid.fill = GridBagConstraints.HORIZONTAL;
 
-
         JLabel etiquetanombre = new JLabel("Nombre");
         etiquetanombre.setFont(new Font("Roboto", Font.PLAIN, 18));
         etiquetanombre.setForeground(Color.BLACK);
@@ -45,7 +54,7 @@ public class Gui extends JFrame {
         grid.gridy = 0;
         panelFormulario.add(etiquetanombre, grid);
 
-        JTextField campoNombre = new JTextField(20);
+        campoNombre = new JTextField(20);
         campoNombre.setFont(new Font("Roboto", Font.PLAIN, 20));
         grid.gridx = 1;
         grid.gridy = 0;
@@ -58,7 +67,7 @@ public class Gui extends JFrame {
         grid.gridy = 1;
         panelFormulario.add(etiquetaEdad, grid);
 
-        JTextField campoEdad = new JTextField(20);
+        campoEdad = new JTextField(20);
         campoEdad.setFont(new Font("Roboto", Font.PLAIN, 20));
         grid.gridx = 1;
         grid.gridy = 1;
@@ -72,19 +81,18 @@ public class Gui extends JFrame {
         panelFormulario.add(etiquetaDeOPciones, grid);
 
         String[] opciones = { "Entrada General", "Entrada VIP", "Entrada para Estudiantes" };
-        @SuppressWarnings("rawtypes")
-        JComboBox listadoDeOpciones = new JComboBox<>(opciones);
+        listadoDeOpciones = new JComboBox<>(opciones);
         listadoDeOpciones.setFont(new Font("Roboto", Font.PLAIN, 18));
         grid.gridx = 1;
         grid.gridy = 2;
         panelFormulario.add(listadoDeOpciones, grid);
 
-        JLabel etiquetaSalas= new JLabel("Salas");
+        JLabel etiquetaSalas = new JLabel("Salas");
         etiquetaSalas.setFont(new Font("Roboto", Font.PLAIN, 18));
         etiquetaSalas.setForeground(Color.BLACK);
-        grid.gridx=0;
-        grid.gridy=3;
-        panelFormulario.add(etiquetaSalas,grid);
+        grid.gridx = 0;
+        grid.gridy = 3;
+        panelFormulario.add(etiquetaSalas, grid);
 
         JButton botonEnviar = new JButton();
         botonEnviar.setText("Enviar");
@@ -95,22 +103,37 @@ public class Gui extends JFrame {
         grid.gridy = 3;
         panelFormulario.add(botonEnviar, grid);
 
-        //***************************************Boton Mostrar************************************************ */
-        JButton botonMostrar= new JButton("Mostrar Datos");
+        // ***************************************Boton Mostrar************************************************ */
+        JButton botonMostrar = new JButton("Mostrar Datos");
         botonMostrar.setBackground(Color.GREEN);
-        botonMostrar.setFont(new Font("Roboto",Font.PLAIN, 18));
+        botonMostrar.setFont(new Font("Roboto", Font.PLAIN, 18));
         botonMostrar.setForeground(Color.WHITE);
-        grid.gridx=1;
-        grid.gridy=5;
-        panelFormulario.add(botonMostrar,grid);
-        //**************************************EVENTOS**************************************************************** */
+        grid.gridx = 1;
+        grid.gridy = 5;
+        panelFormulario.add(botonMostrar, grid);
+        // **************************************EVENTOS*****************************************************************/
+        botonEnviar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guardarDatos();
+            }
+        });
 
-        
     }
-    // private void GuardarDatos(){
+
+    public void guardarDatos() {
+        // String nombre= campoNombre.getText();
+        // int edad= Integer.parseInt(campoEdad.getText());
+        // String tipoEntrada= (String) listadoDeOpciones.getSelectedItem();
+
+        //Persona persona= new Persona(nombre,edad,tipoEntrada);
+        //personas.add(persona);
+        JOptionPane.showMessageDialog(null, "Los datos se guardaron correctamente");
     
-    // }
+
+    }
+
     // private void mostrarDatos(){
-        
+
     // }
 }
