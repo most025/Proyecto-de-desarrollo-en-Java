@@ -110,4 +110,7 @@ public class Gui extends JFrame {
     // private void GuardarDatos(){
     
     // }
+    // private void mostrarDatos(){
+        
+    // }
 }
