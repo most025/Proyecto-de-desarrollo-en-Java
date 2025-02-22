@@ -33,6 +33,6 @@ public abstract class Entrada {
     // }
 
     public abstract double calcularPrecio();
-    //public abstract void generarAsiento();
+    public abstract void generarAsiento();
 
 }

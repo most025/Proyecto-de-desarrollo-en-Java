@@ -7,4 +7,9 @@ public class EntradaGeneral extends Entrada {
     public double calcularPrecio() {
         return PRECIO;
     } 
+    @Override
+    public void generarAsiento() {
+        // TODO Auto-generated method stub
+        
+    }
 }

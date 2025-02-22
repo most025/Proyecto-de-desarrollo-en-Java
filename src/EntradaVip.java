@@ -8,6 +8,11 @@ public EntradaVip(String tipo, String asiento){
 public double calcularPrecio() {
     return PRECIO+(PRECIO*50/100);
 }
+@Override
+public void generarAsiento() {
+    // TODO Auto-generated method stub
+    
+}
 
 
 
