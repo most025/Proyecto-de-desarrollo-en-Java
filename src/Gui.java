@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Gui extends JFrame {
-    /******************************************Variables Globales**************************************************** */
-    //private ArrayList<Persona> personas;
+    /****************************************** Variables Globales*************************************************/
+    // private ArrayList<Persona> personas;
     private JTextField campoNombre;
     private JTextField campoEdad;
     private JComboBox<String> listadoDeOpciones;
@@ -38,7 +38,7 @@ public class Gui extends JFrame {
     }
 
     private void formulario() {
-        // *************************** Conponentes del formulario **************************************************************
+        // *************************** Conponentes del formulario**************************************************************
         JPanel panelFormulario = new JPanel(new GridBagLayout());
         panelFormulario.setBackground(Color.LIGHT_GRAY);
         this.getContentPane().add(panelFormulario);
@@ -118,6 +118,12 @@ public class Gui extends JFrame {
                 guardarDatos();
             }
         });
+        botonMostrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarDatos();
+            }
+        });
 
     }
 
@@ -126,14 +132,12 @@ public class Gui extends JFrame {
         // int edad= Integer.parseInt(campoEdad.getText());
         // String tipoEntrada= (String) listadoDeOpciones.getSelectedItem();
 
-        //Persona persona= new Persona(nombre,edad,tipoEntrada);
-        //personas.add(persona);
+        // Persona persona= new Persona(nombre,edad,tipoEntrada);
+        // personas.add(persona);
         JOptionPane.showMessageDialog(null, "Los datos se guardaron correctamente");
-    
-
     }
 
-    // private void mostrarDatos(){
+    private void mostrarDatos(){
 
-    // }
+    }
 }
