@@ -24,14 +24,6 @@ public abstract class Entrada {
         this.asiento = asiento;
     }
 
-    // public double getPrecio() {
-    //     return precio;
-    // }
-
-    // public void setPrecio(double precio) {
-    //     this.precio = precio;
-    // }
-
     public abstract double calcularPrecio();
     public abstract void generarAsiento();
 
