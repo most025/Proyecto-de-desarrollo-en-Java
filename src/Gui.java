@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 //import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ public class Gui extends JFrame {
     private JTextField campoNombre;
     private JTextField campoEdad;
     private JComboBox<String> listadoDeOpciones;
+    private JCheckBox [][] asientos;
 
     public Gui() {
         this.setSize(600, 400);
@@ -94,13 +96,44 @@ public class Gui extends JFrame {
         grid.gridy = 3;
         panelFormulario.add(etiquetaSalas, grid);
 
+        JPanel panelAsientos = new JPanel(new GridBagLayout());
+        grid.gridx = 1;
+        grid.gridy = 3;
+        grid.gridwidth = 2;
+        panelFormulario.add(panelAsientos, grid);
+
+        asientos= new JCheckBox[10][10];
+        GridBagConstraints asientoGrid = new GridBagConstraints();
+        asientoGrid.insets = new Insets(2, 2, 2, 2);
+
+        for (int j = 0; j < 10; j++) {
+            JLabel etiquetaColumna = new JLabel(String.valueOf(j + 1));
+            asientoGrid.gridx = j + 1;
+            asientoGrid.gridy = 0;
+            panelAsientos.add(etiquetaColumna, asientoGrid);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            JLabel etiquetaFila = new JLabel(String.valueOf((char) ('A' + i)));
+            asientoGrid.gridx = 0;
+            asientoGrid.gridy = i + 1;
+            panelAsientos.add(etiquetaFila, asientoGrid);
+
+            for (int j = 0; j < 10; j++) {
+                asientos[i][j] = new JCheckBox();
+                asientoGrid.gridx = j + 1;
+                asientoGrid.gridy = i + 1;
+                panelAsientos.add(asientos[i][j], asientoGrid);
+            }
+        }
+
         JButton botonEnviar = new JButton();
         botonEnviar.setText("Enviar");
         botonEnviar.setFont(new Font("Roboto", Font.BOLD, 18));
         botonEnviar.setBackground(Color.BLUE);
         botonEnviar.setForeground(Color.WHITE);
         grid.gridx = 1;
-        grid.gridy = 3;
+        grid.gridy = 4;
         panelFormulario.add(botonEnviar, grid);
 
         // ***************************************Boton Mostrar************************************************ */
@@ -125,9 +158,19 @@ public class Gui extends JFrame {
             }
         });
 
+        listadoDeOpciones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarAsientos();
+                
+            }
+        });
+
     }
 
     public void guardarDatos() {
+        /*NOTA: tratar de agregar funcionalidad al guardado de datos y al mostrar datos  */
+
         // String nombre= campoNombre.getText();
         // int edad= Integer.parseInt(campoEdad.getText());
         // String tipoEntrada= (String) listadoDeOpciones.getSelectedItem();
@@ -138,6 +181,39 @@ public class Gui extends JFrame {
     }
 
     private void mostrarDatos(){
-
+        
     }
+
+    private void actualizarAsientos(){
+        String opcion = (String) listadoDeOpciones.getSelectedItem();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                asientos[i][j].setEnabled(true);
+                asientos[i][j].setSelected(false);
+            }
+        }
+        if (opcion.equals("Entrada para Estudiantes")) {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    if (j < 8) {
+                        asientos[i][j].setEnabled(false);
+                    }
+                }
+            }
+        } 
+        /*Nota: reevaluar esta implementacion y arreglarla */
+        //else if (opcion.equals("Entrada VIP")) {
+        //     int[][] vipAsientos = {
+        //         {4, 1}, {5, 1}, {4, 2}, {5, 2}, {3, 3}, {4, 3}, {5, 3}, {6, 3},
+        //         {3, 4}, {4, 4}, {5, 4}, {6, 4}, {2, 5}, {3, 5}, {4, 5}, {5, 5}, {6, 5},
+        //         {2, 6}, {3, 6}, {4, 6}, {5, 6}, {6, 6}, {7, 6}, {1, 7}, {2, 7}, {3, 7},
+        //         {4, 7}, {5, 7}, {6, 7}, {7, 7}, {8, 7}, {1, 8}, {2, 8}, {3, 8}, {4, 8},
+        //         {5, 8}, {6, 8}, {7, 8}, {8, 8}
+        //     };
+        //     for (int[] asiento : vipAsientos) {
+        //         asientos[asiento[0]][asiento[1]].setEnabled(false);
+        //     }
+        // }
+    }
+
 }
