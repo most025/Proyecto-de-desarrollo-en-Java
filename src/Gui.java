@@ -167,7 +167,8 @@ public class Gui extends JFrame {
         });
 
     }
-
+/***************************************************Metodos*********************************************
+ */
     public void guardarDatos() {
         /*NOTA: tratar de agregar funcionalidad al guardado de datos y al mostrar datos  */
 
