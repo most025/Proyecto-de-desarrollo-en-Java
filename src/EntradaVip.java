@@ -10,7 +10,7 @@ public double calcularPrecio() {
 }
 @Override
 public void generarAsiento() {
-    // TODO Auto-generated method stub
+    
     
 }
 
