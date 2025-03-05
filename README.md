@@ -1,17 +1,25 @@
-## Proyecto de desarrollo en java
+# 🚀 Proyecto de Desarrollo en Java
 
-Es un proyecto de desarrollo para un examen final el cual se ha pedido desarrollar un pequeño programa en java.Este mismo programa debe tener una interfaz grafica que interactue con el usuario haciendo uso de Swing, Java FX u otras herramientas.
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 
-## Estructura de carpetas del proyecto
+📌 **Descripción del Proyecto**  
+Este es un proyecto de desarrollo para un examen final en el cual se solicita crear un pequeño programa en **Java**. Este mismo programa debe tener una interfaz grafica que interactue con el usuario haciendo uso de Swing, Java FX u otras herramientas de desarrollo gráfico.
 
-El área de trabajo contiene dos carpetas de forma predeterminada, donde:
+---
 
-- `src`: La carpeta para mantener los archivos del código fuente
-- `lib`: La carpeta para mantener las dependencias
+## 📁 Estructura de Carpetas del Proyecto
 
-Mientras tanto,  los archivos de salida compilados se generarán en la carpeta de forma predeterminada.`bin`.
+El área de trabajo contiene las siguientes carpetas de forma predeterminada:
 
-Si desea ver los Requirimientos del programa.
-[Requerimientos](md/Requerimientos.md)
+- 📂 **`src`** → Carpeta que contiene los archivos del código fuente.
+- 📂 **`lib`** → Carpeta que contiene las dependencias necesarias.
+- 📂 **`bin`** → Carpeta donde se generan los archivos de salida compilados.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Si desea ver los requerimientos del programa, consulte el siguiente enlace:  
+📄 **[Requerimientos](md/Requerimientos.md)**
+
+---
+
+📌 *Si desea personalizar la estructura de carpetas, puede modificar el archivo* `.vscode/settings.json` *y actualizar la configuración correspondiente.*
+
+
