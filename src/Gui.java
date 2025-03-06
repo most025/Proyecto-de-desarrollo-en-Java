@@ -6,7 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 public class Gui extends JFrame {
     /****************************************** Variables Globales*************************************************/
-    // private ArrayList<Persona> personas;
+    private ArrayList<Cliente> personas;
     private JTextField campoNombre;
     private JTextField campoEdad;
     private JComboBox<String> listadoDeOpciones;
@@ -170,14 +170,14 @@ public class Gui extends JFrame {
 /***************************************************Metodos*********************************************
  */
     public void guardarDatos() {
-        /*NOTA: tratar de agregar funcionalidad al guardado de datos y al mostrar datos  */
+        /* NOTA: Se agrego un pseudofuncionamiento va ha ver que pulirlo un poco más */
 
-        // String nombre= campoNombre.getText();
-        // int edad= Integer.parseInt(campoEdad.getText());
-        // String tipoEntrada= (String) listadoDeOpciones.getSelectedItem();
-
-        // Persona persona= new Persona(nombre,edad,tipoEntrada);
-        // personas.add(persona);
+        String nombre= campoNombre.getText();
+        int edad = Integer.parseInt(campoEdad.getText());
+        // String opcion=(String) listadoDeOpciones.getSelectedItem();
+        new Cliente(nombre, edad);
+        
+        
         JOptionPane.showMessageDialog(null, "Los datos se guardaron correctamente");
     }
 
