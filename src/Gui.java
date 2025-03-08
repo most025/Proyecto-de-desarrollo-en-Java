@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -32,6 +31,7 @@ public class Gui extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         iniciarComponentes();
+        personas= new ArrayList<>();
 
     }
 
@@ -170,15 +170,32 @@ public class Gui extends JFrame {
 /***************************************************Metodos*********************************************
  */
     public void guardarDatos() {
-        /* NOTA: Se agrego un pseudofuncionamiento va ha ver que pulirlo un poco más */
+        try {
+            String nombre = campoNombre.getText();
+            // verifica que el  campo nombre no este vacio.
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
+                return;
+            }
 
-        String nombre= campoNombre.getText();
-        int edad = Integer.parseInt(campoEdad.getText());
-        // String opcion=(String) listadoDeOpciones.getSelectedItem();
-        new Cliente(nombre, edad);
-        
-        
-        JOptionPane.showMessageDialog(null, "Los datos se guardaron correctamente");
+            int edad;
+            try {
+                // Intenta convertir el texto del campo edad a un número entero.
+                edad = Integer.parseInt(campoEdad.getText());
+            } catch (NumberFormatException e) {
+              // muestra el siguiente cartel si el numero no es entero.  
+                JOptionPane.showMessageDialog(null, "La edad debe ser un número válido");
+                return;
+            }
+
+            Cliente persona = new Cliente(nombre, edad);
+            personas.add(persona);
+            //si se guardaron los datos se mostrara el siguiente cartel.
+            JOptionPane.showMessageDialog(null, "Los datos se guardaron correctamente");
+        } catch (Exception e) {
+            // si no se guardaron los datos mostrara el siguiente cartel de  error.
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al guardar los datos: " + e.getMessage());
+        }
     }
 
     private void mostrarDatos(){
