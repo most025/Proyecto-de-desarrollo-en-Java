@@ -5,7 +5,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+//import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,7 +21,7 @@ import javax.swing.JTextField;
 
 public class Gui extends JFrame {
     /****************************************** Variables Globales*************************************************/
-    private ArrayList<Cliente> personas;
+    //private ArrayList<Cliente> personas;
     private JTextField campoNombre;
     private JTextField campoEdad;
     private JComboBox<String> listadoDeOpciones;
@@ -31,7 +34,7 @@ public class Gui extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         iniciarComponentes();
-        personas= new ArrayList<>();
+        //personas= new ArrayList<>();
 
     }
 
@@ -167,35 +170,48 @@ public class Gui extends JFrame {
         });
 
     }
-/***************************************************Metodos*********************************************
- */
+/********************************************Metodos**********************************************/
     public void guardarDatos() {
+        // Nesesito una funcionalidad de guardado de datos en un archivo de texto.
         try {
             String nombre = campoNombre.getText();
-            // verifica que el  campo nombre no este vacio.
-            if (nombre.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío");
+            String edad = campoEdad.getText();
+            String tipoEntrada = (String) listadoDeOpciones.getSelectedItem();
+            
+            StringBuilder asientosSeleccionados = new StringBuilder();
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    if (asientos[i][j].isSelected()) {
+                        asientosSeleccionados.append((char)('A' + i)).append(j + 1).append(",");
+                    }
+                }
+            }
+            
+            if (nombre.isEmpty() || edad.isEmpty() || asientosSeleccionados.length() == 0) {
+                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
                 return;
             }
 
-            int edad;
-            try {
-                // Intenta convertir el texto del campo edad a un número entero.
-                edad = Integer.parseInt(campoEdad.getText());
-            } catch (NumberFormatException e) {
-              // muestra el siguiente cartel si el numero no es entero.  
-                JOptionPane.showMessageDialog(null, "La edad debe ser un número válido");
-                return;
-            }
-
-            Cliente persona = new Cliente(nombre, edad);
-            personas.add(persona);
-            //si se guardaron los datos se mostrara el siguiente cartel.
-            JOptionPane.showMessageDialog(null, "Los datos se guardaron correctamente");
-        } catch (Exception e) {
-            // si no se guardaron los datos mostrara el siguiente cartel de  error.
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al guardar los datos: " + e.getMessage());
+            FileWriter archivo = new FileWriter("reservas.txt", true);
+            BufferedWriter escritor = new BufferedWriter(archivo);
+            escritor.write("Nombre: " + nombre + "\n");
+            escritor.write("Edad: " + edad + "\n");
+            escritor.write("Tipo de Entrada: " + tipoEntrada + "\n");
+            escritor.write("Asientos: " + asientosSeleccionados.toString() + "\n");
+            escritor.write("------------------------\n");
+            escritor.close();
+            
+            JOptionPane.showMessageDialog(this, "Datos guardados exitosamente");
+            campoNombre.setText("");
+            campoEdad.setText("");
+            listadoDeOpciones.setSelectedIndex(0);
+            actualizarAsientos();
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + ex.getMessage());
         }
+
+    
     }
 
     private void mostrarDatos(){
