@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 //import java.util.ArrayList;
@@ -191,8 +192,9 @@ public class Gui extends JFrame {
                 JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
                 return;
             }
-
-            FileWriter archivo = new FileWriter("reservas.txt", true);
+            File carpeta= new File("Datos");
+            carpeta.mkdir();
+            FileWriter archivo = new FileWriter("Datos/reservas.txt", true);
             BufferedWriter escritor = new BufferedWriter(archivo);
             escritor.write("Nombre: " + nombre + "\n");
             escritor.write("Edad: " + edad + "\n");
