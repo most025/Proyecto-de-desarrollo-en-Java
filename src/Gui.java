@@ -20,9 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Gui extends JFrame {
-    /******************************************
-     * Variables Globales
-     *************************************************/
+    /******************************************* Variables Globales*************************************************/
     private JTextField campoNombre;
     private JTextField campoEdad;
     private JComboBox<String> listadoDeOpciones;
@@ -42,8 +40,7 @@ public class Gui extends JFrame {
     }
 
     private void formulario() {
-        // *************************** Conponentes del
-        // formulario**************************************************************
+        // *************************** Conponentes del formulario**************************************************************
         JPanel panelFormulario = new JPanel(new GridBagLayout());
         panelFormulario.setBackground(Color.LIGHT_GRAY);
         this.getContentPane().add(panelFormulario);
@@ -139,8 +136,7 @@ public class Gui extends JFrame {
         grid.gridy = 4;
         panelFormulario.add(botonEnviar, grid);
 
-        // ***************************************Boton
-        // Mostrar************************************************ */
+        // ***************************************Boton Mostrar************************************************ */
         JButton botonMostrar = new JButton("Mostrar Datos");
         botonMostrar.setBackground(Color.GREEN);
         botonMostrar.setFont(new Font("Roboto", Font.PLAIN, 18));
@@ -169,12 +165,9 @@ public class Gui extends JFrame {
 
             }
         });
-
     }
 
-    /********************************************
-     * Metodos
-     **********************************************/
+    /******************************************* Metodos *************************************************/
     public void guardarDatos() {
         try {
             // Se encargan de extraer los datos de los campos del formulario.
@@ -257,6 +250,32 @@ public class Gui extends JFrame {
                 int columna = Integer.parseInt(asiento.substring(1)) - 1; // Convertir número a índice
                 asientos[fila][columna].setEnabled(true);
             }
+        } else if (opcion.equals("Entrada General")) {
+            for (int i=0; i< 10; i++){
+                for (int j=0; j< 10; j++){
+                    asientos[i][j].setEnabled(true);
+                }
+            } 
+            // Este for se encarga de desabilitar la columna 9 y 1o de la sala.
+            for (int i = 0; i < 10; i++) {
+                asientos[i][8].setEnabled(false);
+                asientos[i][9].setEnabled(false);
+            }
+
+            String [] asientosVIP={
+                "E3", "F3", "E4", "F4", "D5", "E5", "F5", "G5",
+                "D6", "E6", "F6", "G6", "C7", "D7", "E7", "F7",
+                "G7", "H7", "C8", "D8", "E8", "F8", "G8", "H8"
+            };
+            for (String asiento : asientosVIP) {
+                int fila = asiento.charAt(0) - 'A'; // Convertir letra a índice (A=0, B=1, etc)
+                int columna = Integer.parseInt(asiento.substring(1)) - 1; // Convertir número a índice
+                asientos[fila][columna].setEnabled(false);
+            }
+
+
+
+            
         }
 
     }
