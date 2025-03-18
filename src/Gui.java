@@ -42,7 +42,8 @@ public class Gui extends JFrame {
     private void formulario() {
         // *************************** Conponentes del formulario**************************************************************
         JPanel panelFormulario = new JPanel(new GridBagLayout());
-        panelFormulario.setBackground(Color.LIGHT_GRAY);
+        Color colorFondo= new Color(206, 186, 177);
+        panelFormulario.setBackground(colorFondo);
         this.getContentPane().add(panelFormulario);
 
         GridBagConstraints grid = new GridBagConstraints();
@@ -97,6 +98,8 @@ public class Gui extends JFrame {
         panelFormulario.add(etiquetaSalas, grid);
 
         JPanel panelAsientos = new JPanel(new GridBagLayout());
+        Color colorPanel= new Color(223,180,148);
+        panelAsientos.setBackground(colorPanel);
         grid.gridx = 1;
         grid.gridy = 3;
         grid.gridwidth = 2;
@@ -121,6 +124,7 @@ public class Gui extends JFrame {
 
             for (int j = 0; j < 10; j++) {
                 asientos[i][j] = new JCheckBox();
+                asientos[i][j].setBackground(colorPanel);
                 asientoGrid.gridx = j + 1;
                 asientoGrid.gridy = i + 1;
                 panelAsientos.add(asientos[i][j], asientoGrid);
@@ -130,7 +134,8 @@ public class Gui extends JFrame {
         JButton botonEnviar = new JButton();
         botonEnviar.setText("Enviar");
         botonEnviar.setFont(new Font("Roboto", Font.BOLD, 18));
-        botonEnviar.setBackground(Color.BLUE);
+        Color colorEnviar= new Color(23,80,106);
+        botonEnviar.setBackground(colorEnviar);
         botonEnviar.setForeground(Color.WHITE);
         grid.gridx = 1;
         grid.gridy = 4;
@@ -138,8 +143,9 @@ public class Gui extends JFrame {
 
         // ***************************************Boton Mostrar************************************************ */
         JButton botonMostrar = new JButton("Mostrar Datos");
-        botonMostrar.setBackground(Color.GREEN);
-        botonMostrar.setFont(new Font("Roboto", Font.PLAIN, 18));
+        Color customColor= new Color(52,81,58);
+        botonMostrar.setBackground(customColor);
+        botonMostrar.setFont(new Font("Roboto", Font.BOLD, 18));
         botonMostrar.setForeground(Color.WHITE);
         grid.gridx = 1;
         grid.gridy = 5;
