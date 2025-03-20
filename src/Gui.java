@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,11 +11,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -83,9 +86,29 @@ public class Gui extends JFrame {
         grid.gridy = 2;
         panelFormulario.add(etiquetaDeOPciones, grid);
 
-        String[] opciones = { "Entrada General", "Entrada VIP", "Entrada para Estudiantes" };
+        String[] opciones = {"Selecciona una opcion", "Entrada General", "Entrada VIP", "Entrada para Estudiantes" };
         listadoDeOpciones = new JComboBox<>(opciones);
         listadoDeOpciones.setFont(new Font("Roboto", Font.PLAIN, 18));
+        listadoDeOpciones.setRenderer(new DefaultListCellRenderer(){
+           @Override
+           public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
+                   boolean cellHasFocus) {
+                    Component c= super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value.equals("Selecciona una opcion")){
+                        setEnabled(false);
+                    }else if (value. equals("Entrada General")) {
+                        Color verdePersonalizado= new Color(166,188,54);
+                        setBackground(verdePersonalizado); 
+                    }else if (value.equals("Entrada VIP")){
+                        Color amarilloPersonalizado= new Color(249,221,54);
+                        setBackground(amarilloPersonalizado);
+                    }else if (value.equals("Entrada para Estudiantes")){
+                        Color celestePersonalizado= new Color(189,211,206);
+                        setBackground(celestePersonalizado);  
+                    }
+                    return c;
+           }
+        });
         grid.gridx = 1;
         grid.gridy = 2;
         panelFormulario.add(listadoDeOpciones, grid);
@@ -125,6 +148,7 @@ public class Gui extends JFrame {
             for (int j = 0; j < 10; j++) {
                 asientos[i][j] = new JCheckBox();
                 asientos[i][j].setBackground(colorPanel);
+                asientos[i][j].setEnabled(false);
                 asientoGrid.gridx = j + 1;
                 asientoGrid.gridy = i + 1;
                 panelAsientos.add(asientos[i][j], asientoGrid);
@@ -169,6 +193,15 @@ public class Gui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 actualizarAsientos();
 
+            }
+        });
+
+        listadoDeOpciones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (listadoDeOpciones.getSelectedItem().equals("Selecciona una opcion")){
+                    listadoDeOpciones.setSelectedIndex(1);  
+                }
             }
         });
     }
@@ -278,9 +311,6 @@ public class Gui extends JFrame {
                 int columna = Integer.parseInt(asiento.substring(1)) - 1; // Convertir número a índice
                 asientos[fila][columna].setEnabled(false);
             }
-
-
-
             
         }
 
