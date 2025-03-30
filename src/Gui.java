@@ -61,6 +61,8 @@ public class Gui extends JFrame {
         panelFormulario.add(etiquetanombre, grid);
 
         campoNombre = new JTextField(20);
+        Color colorCampo1= new Color(250,221,204);
+        campoNombre.setBackground(colorCampo1);
         campoNombre.setFont(new Font("Roboto", Font.PLAIN, 20));
         grid.gridx = 1;
         grid.gridy = 0;
@@ -74,6 +76,8 @@ public class Gui extends JFrame {
         panelFormulario.add(etiquetaEdad, grid);
 
         campoEdad = new JTextField(20);
+        Color colorCampo2= new Color(250,221,204);
+        campoEdad.setBackground(colorCampo2);
         campoEdad.setFont(new Font("Roboto", Font.PLAIN, 20));
         grid.gridx = 1;
         grid.gridy = 1;
@@ -86,15 +90,17 @@ public class Gui extends JFrame {
         grid.gridy = 2;
         panelFormulario.add(etiquetaDeOPciones, grid);
 
-        String[] opciones = {"Selecciona una opcion", "Entrada General", "Entrada VIP", "Entrada para Estudiantes" };
+        String[] opciones = {"Selecciona una opción", "Entrada General", "Entrada VIP", "Entrada para Estudiantes" };
         listadoDeOpciones = new JComboBox<>(opciones);
+        Color colorOpciones= new Color(250,221,204);
+        listadoDeOpciones.setBackground(colorOpciones);
         listadoDeOpciones.setFont(new Font("Roboto", Font.PLAIN, 18));
         listadoDeOpciones.setRenderer(new DefaultListCellRenderer(){
            @Override
            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
                    boolean cellHasFocus) {
                     Component c= super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                    if(value.equals("Selecciona una opcion")){
+                    if(value.equals("Selecciona una opción")){
                         setEnabled(false);
                     }else if (value. equals("Entrada General")) {
                         Color verdePersonalizado= new Color(166,188,54);
@@ -199,7 +205,7 @@ public class Gui extends JFrame {
         listadoDeOpciones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (listadoDeOpciones.getSelectedItem().equals("Selecciona una opcion")){
+                if (listadoDeOpciones.getSelectedItem().equals("Selecciona una opción")){
                     listadoDeOpciones.setSelectedIndex(1);  
                 }
             }
