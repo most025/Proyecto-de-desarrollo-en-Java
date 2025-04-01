@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -21,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class Gui extends JFrame {
     /******************************************* Variables Globales*************************************************/
@@ -230,6 +232,14 @@ public class Gui extends JFrame {
             }
             // Esta condicional se encarga de comprobar que los campos esten vacios.
             if (nombre.isEmpty() || edad.isEmpty() || asientosSeleccionados.length() == 0) {
+                UIManager.put("OptionPane.background", new Color(250,221,204));
+                UIManager.put("Panel.background", new Color(250,221,204));
+                UIManager.put("OptionPane.messageFont", new Font("Roboto", Font.PLAIN, 14)); 
+                UIManager.put("Button.background", new Color(233,150,158));
+                UIManager.put("Button.foreground", new Color(255,248,240)); 
+                UIManager.put("Button.border",BorderFactory.createEmptyBorder(5,10,5,10));
+                UIManager.put("Button.focus", new Color(0,0,0,0));
+                UIManager.put("Button.font", new Font("Roboto", Font.PLAIN, 14));           
                 JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
                 return;
             }
@@ -243,7 +253,15 @@ public class Gui extends JFrame {
             escritor.write("Asientos: " + asientosSeleccionados.toString() + "\n");
             escritor.write("------------------------\n");
             escritor.close();
-
+            
+            UIManager.put("OptionPane.background", new Color(250,221,204));
+            UIManager.put("Panel.background", new Color(250, 221, 204));
+            UIManager.put("OptionPane.messageFont", new Font("Roboto", Font.PLAIN, 14));
+            UIManager.put("Button.background", new Color(233,150,158));
+            UIManager.put("Button.foreground", new Color(255,248,240)); 
+            UIManager.put("Button.border",BorderFactory.createEmptyBorder(5,10,5,10));
+            UIManager.put("Button.focus", new Color(0,0,0,0));
+            UIManager.put("Button.font", new Font("Roboto", Font.PLAIN, 14));
             JOptionPane.showMessageDialog(this, "Datos guardados exitosamente");
             campoNombre.setText("");
             campoEdad.setText("");
@@ -251,6 +269,14 @@ public class Gui extends JFrame {
             actualizarAsientos();
 
         } catch (IOException ex) {
+            UIManager.put("OptionPane.background", new Color(250,221,204));
+            UIManager.put("Panel.background", new Color(250,221,204));
+            UIManager.put("OptionPane.messageFont", new Font("Roboto", Font.PLAIN, 14));
+            UIManager.put("Button.background", new Color(233,150,158));
+            UIManager.put("Button.foreground", new Color(255,248,240)); 
+            UIManager.put("Button.border",BorderFactory.createEmptyBorder(5,10,5,10));
+            UIManager.put("Button.focus", new Color(0,0,0,0));
+            UIManager.put("Button.font", new Font("Roboto", Font.PLAIN, 14));
             JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + ex.getMessage());
         }
     }
