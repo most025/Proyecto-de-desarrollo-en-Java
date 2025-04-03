@@ -205,22 +205,27 @@ public class Gui extends JFrame {
                     }
                 }
             }
-            // Esta condicional se encarga de comprobar que los campos esten vacios.
+            // Esta condición se encarga de comprobar que los campos del formulario esten vacios.
             if (nombre.isEmpty() && edad.isEmpty() && asientosSeleccionados.length() == 0) {
-                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
+                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos del formulario.");
                 return;
-                // esta condicion verifica que los que no esten vacios.
+                // esta condición verifica que los que los campos del formulario no esten vacios.
             } else if (!nombre.isEmpty() && !edad.isEmpty() && asientosSeleccionados.length() != 0) {
-                File carpeta = new File("Datos");
-                carpeta.mkdir();
-                FileWriter archivo = new FileWriter("Datos/reservas.txt", true);
-                BufferedWriter escritor = new BufferedWriter(archivo);
-                escritor.write("Nombre: " + nombre + "\n");
-                escritor.write("Edad: " + edad + "\n");
-                escritor.write("Tipo de Entrada: " + tipoEntrada + "\n");
-                escritor.write("Asientos: " + asientosSeleccionados.toString() + "\n");
-                escritor.write("------------------------\n");
-                escritor.close();
+                File carpetaDeGuardadado = new File("Save");
+                carpetaDeGuardadado.mkdir();
+                if (carpetaDeGuardadado.exists()){
+                FileWriter archivoDeTexto = new FileWriter("Save/Save Data.txt", true);
+                BufferedWriter escribirArchivo = new BufferedWriter(archivoDeTexto);
+                escribirArchivo.write("Nombre: " + nombre + "\n");
+                escribirArchivo.write("Edad: " + edad + "\n");
+                escribirArchivo.write("Tipo de Entrada: " + tipoEntrada + "\n");
+                escribirArchivo.write("Asientos: " + asientosSeleccionados.toString() + "\n");
+                escribirArchivo.write("------------------------\n");
+                escribirArchivo.close();  
+                }else{
+                    JOptionPane.showMessageDialog(this,"Ha habido un error en el proceso de guardado");
+                }
+                
 
                 JOptionPane.showMessageDialog(this, "Datos guardados exitosamente");
                 campoNombre.setText("");
@@ -302,12 +307,14 @@ public class Gui extends JFrame {
     }
 
     private void configuracionUIManager() {
-        // Esta configuración edita el JOptionPane como el color del fondo, fuente y
-        // botones.
-        UIManager.put("OptionPane.background", new Color(250, 221, 204));
-        UIManager.put("Panel.background", new Color(250, 221, 204));
+        // Esta configuración edita el JOptionPane como el color del fondo, fuente y botones.
+        // UIManager.put("OptionPane.background", new Color(250, 221, 204));
+        UIManager.put("OptionPane.background", new Color(255, 190, 152));
+        // UIManager.put("Panel.background", new Color(250, 221, 204));
+        UIManager.put("Panel.background", new Color(255, 190, 152));
         UIManager.put("OptionPane.messageFont", new Font("Roboto", Font.PLAIN, 14));
-        UIManager.put("Button.background", new Color(233, 150, 158));
+        // UIManager.put("Button.background", new Color(233, 150, 158));
+        UIManager.put("Button.background", new Color(105, 104, 146));
         UIManager.put("Button.foreground", new Color(255, 248, 240));
         UIManager.put("Button.border", BorderFactory.createEmptyBorder(5, 10, 5, 10));
         UIManager.put("Button.focus", new Color(0, 0, 0, 0));
