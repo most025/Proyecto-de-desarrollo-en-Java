@@ -189,7 +189,7 @@ public class Gui extends JFrame {
     }
 
     /******************************************** Metodos *************************************************/
-    public void guardarDatos() {
+    public void guardadoDeDatos() {
         try {
             configuracionUIManager();
             // Se encargan de extraer los datos de los campos del formulario.
@@ -325,7 +325,7 @@ public class Gui extends JFrame {
         botonEnviar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                guardarDatos();
+                guardadoDeDatos();
             }
         });
         botonMostrar.addActionListener(new ActionListener() {
