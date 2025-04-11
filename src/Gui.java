@@ -191,7 +191,7 @@ public class Gui extends JFrame {
     /******************************************** Metodos *************************************************/
     public void guardadoDeDatos() {
         try {
-            configuracionUIManager();
+            configuracionDePersonalizacion();
             // Se encargan de extraer los datos de los campos del formulario.
             String nombre = campoNombre.getText();
             String edad = campoEdad.getText();
@@ -306,7 +306,7 @@ public class Gui extends JFrame {
 
     }
 
-    private void configuracionUIManager() {
+    private void configuracionDePersonalizacion() {
         // Esta configuración edita el JOptionPane como el color del fondo, fuente y botones.
         // UIManager.put("OptionPane.background", new Color(250, 221, 204));
         UIManager.put("OptionPane.background", new Color(255, 190, 152));
