@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,7 +31,9 @@ public class Gui extends JFrame {
     private JCheckBox[][] asientos;
     private JButton botonEnviar;
     private JButton botonMostrar;
+    private File carpetaDeGuardadado;
 
+    // ---------------------------------------------------------------------------------------------------------------------
     public Gui() {
         this.setSize(600, 400);
         this.setTitle("Sistema de entrada de cine");
@@ -47,7 +48,8 @@ public class Gui extends JFrame {
     }
 
     private void formulario() {
-        // *************************** Conponentes del formulario**************************************************************
+        // *************************** Conponentes del
+        // formulario**************************************************************
         JPanel panelFormulario = new JPanel(new GridBagLayout());
         Color colorFondo = new Color(206, 186, 177);
         panelFormulario.setBackground(colorFondo);
@@ -175,7 +177,7 @@ public class Gui extends JFrame {
         grid.gridy = 4;
         panelFormulario.add(botonEnviar, grid);
 
-        // ***************************************Boton Mostrar************************************************ */
+        // ***************************************Boton Mostrar*******************************************/
         botonMostrar = new JButton("Mostrar Datos");
         Color customColor = new Color(52, 81, 58);
         botonMostrar.setBackground(customColor);
@@ -184,58 +186,37 @@ public class Gui extends JFrame {
         grid.gridx = 1;
         grid.gridy = 5;
         panelFormulario.add(botonMostrar, grid);
-        // **************************************EVENTOS*****************************************************************/
+        // **************************************EVENTOS***************************************************/
         eventosDelSistema();
     }
 
-    /******************************************** Metodos *************************************************/
+    /******************************************** Metodos*************************************************/
     public void guardadoDeDatos() {
-        try {
-            configuracionDePersonalizacion();
-            // Se encargan de extraer los datos de los campos del formulario.
-            String nombre = campoNombre.getText();
-            String edad = campoEdad.getText();
-            String tipoEntrada = (String) listadoDeOpciones.getSelectedItem();
+        configuracionDePersonalizacion();
+        // Se encargan de extraer los datos de los campos del formulario.
+        String nombre = campoNombre.getText();
+        String edad = campoEdad.getText();
+        String tipoEntrada = (String) listadoDeOpciones.getSelectedItem();
+        String asientoDeSalaSelecciionado = obtencionDeasientosSeleccionados();
 
-            StringBuilder asientosSeleccionados = new StringBuilder();
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    if (asientos[i][j].isSelected()) {
-                        asientosSeleccionados.append((char) ('A' + i)).append(j + 1).append(",");
-                    }
-                }
-            }
-            // Esta condición se encarga de comprobar que los campos del formulario esten vacios.
-            if (nombre.isEmpty() && edad.isEmpty() && asientosSeleccionados.length() == 0) {
-                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos del formulario.");
-                return;
-                // esta condición verifica que los que los campos del formulario no esten vacios.
-            } else if (!nombre.isEmpty() && !edad.isEmpty() && asientosSeleccionados.length() != 0) {
-                File carpetaDeGuardadado = new File("Save");
-                carpetaDeGuardadado.mkdir();
-                if (carpetaDeGuardadado.exists()){
-                FileWriter archivoDeTexto = new FileWriter("Save/Save Data.txt", true);
-                BufferedWriter escribirArchivo = new BufferedWriter(archivoDeTexto);
-                escribirArchivo.write("Nombre: " + nombre + "\n");
-                escribirArchivo.write("Edad: " + edad + "\n");
-                escribirArchivo.write("Tipo de Entrada: " + tipoEntrada + "\n");
-                escribirArchivo.write("Asientos: " + asientosSeleccionados.toString() + "\n");
-                escribirArchivo.write("------------------------\n");
-                escribirArchivo.close();  
-                }else{
-                    JOptionPane.showMessageDialog(this,"Ha habido un error en el proceso de guardado");
-                }
-                
+        // Esta condición se encarga de comprobar que los campos del formulario esten
+        // vacios.
+        if (nombre.isEmpty() && edad.isEmpty() && asientoDeSalaSelecciionado.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos del formulario.");
+            return;
+            // esta condición verifica que los que los campos del formulario no esten
+            // vacios.
+        } else if (!nombre.isEmpty() && !edad.isEmpty() && asientoDeSalaSelecciionado.length() != 0) {
+            creacion_Del_Archivo_De_Guardado(nombre, edad, tipoEntrada, asientoDeSalaSelecciionado);
 
-                JOptionPane.showMessageDialog(this, "Datos guardados exitosamente");
-                campoNombre.setText("");
-                campoEdad.setText("");
-                listadoDeOpciones.setSelectedIndex(0);
-                actualizarAsientos();
-            }
-
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Datos guardados exitosamente");
+            campoNombre.setText("");
+            campoEdad.setText("");
+            listadoDeOpciones.setSelectedIndex(0);
+            actualizarAsientos();
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos del formulario.");
+            return;
         }
     }
 
@@ -308,12 +289,9 @@ public class Gui extends JFrame {
 
     private void configuracionDePersonalizacion() {
         // Esta configuración edita el JOptionPane como el color del fondo, fuente y botones.
-        // UIManager.put("OptionPane.background", new Color(250, 221, 204));
         UIManager.put("OptionPane.background", new Color(255, 190, 152));
-        // UIManager.put("Panel.background", new Color(250, 221, 204));
         UIManager.put("Panel.background", new Color(255, 190, 152));
         UIManager.put("OptionPane.messageFont", new Font("Roboto", Font.PLAIN, 14));
-        // UIManager.put("Button.background", new Color(233, 150, 158));
         UIManager.put("Button.background", new Color(105, 104, 146));
         UIManager.put("Button.foreground", new Color(255, 248, 240));
         UIManager.put("Button.border", BorderFactory.createEmptyBorder(5, 10, 5, 10));
@@ -351,5 +329,39 @@ public class Gui extends JFrame {
                 }
             }
         });
+    }
+
+    private void creacion_Del_Archivo_De_Guardado(String nombre, String edad, String tipoDeEntrada,
+            String asientosDeSalaSeleccionado) {
+        carpetaDeGuardadado = new File("Sistema-de-Entrada-de-cine/Datos-Guardados");
+        carpetaDeGuardadado.mkdirs();
+        if (carpetaDeGuardadado.exists()) {
+            try {
+                FileWriter archivoDeTexto = new FileWriter(
+                        "Sistema-de-Entrada-de-cine/Datos-Guardados/Reserva-de-entrada.txt", true);
+                archivoDeTexto.write("Nombre: " + nombre + "\n");
+                archivoDeTexto.write("Edad: " + edad + "\n");
+                archivoDeTexto.write("Tipo de entrada: " + tipoDeEntrada + "\n");
+                archivoDeTexto.write("Nro de asiento de la sala: " + asientosDeSalaSeleccionado + "\n");
+                archivoDeTexto.write("------------------------------------------\n");
+                archivoDeTexto.close();
+            } catch (IOException excepcion) {
+                JOptionPane.showMessageDialog(null, "Error en la cración del archivo");
+            }
+        }
+
+    }
+
+    private String obtencionDeasientosSeleccionados() {
+        StringBuilder asientosSeleccionados = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (asientos[i][j].isSelected()) {
+                    asientosSeleccionados.append((char) ('A' + i)).append(j + 1).append(",");
+                }
+            }
+        }
+        return asientosSeleccionados.toString();
+
     }
 }
