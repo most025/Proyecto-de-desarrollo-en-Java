@@ -48,8 +48,7 @@ public class Gui extends JFrame {
     }
 
     private void formulario() {
-        // *************************** Conponentes del
-        // formulario**************************************************************
+        // --------------------- Conponentes del formulario-------------------------------------------
         JPanel panelFormulario = new JPanel(new GridBagLayout());
         Color colorFondo = new Color(206, 186, 177);
         panelFormulario.setBackground(colorFondo);
@@ -199,13 +198,11 @@ public class Gui extends JFrame {
         String tipoEntrada = (String) listadoDeOpciones.getSelectedItem();
         String asientoDeSalaSelecciionado = obtencionDeasientosSeleccionados();
 
-        // Esta condición se encarga de comprobar que los campos del formulario esten
-        // vacios.
+        // si las casillas del formulario estan vacias al enviar se ejcutara el siguiente bloque de codigo.
         if (nombre.isEmpty() && edad.isEmpty() && asientoDeSalaSelecciionado.length() == 0) {
             JOptionPane.showMessageDialog(this, "Por favor complete todos los campos del formulario.");
             return;
-            // esta condición verifica que los que los campos del formulario no esten
-            // vacios.
+            //si las casillas del formulario no estan vacias se ejecura el codigo de aca abajo.
         } else if (!nombre.isEmpty() && !edad.isEmpty() && asientoDeSalaSelecciionado.length() != 0) {
             creacion_Del_Archivo_De_Guardado(nombre, edad, tipoEntrada, asientoDeSalaSelecciionado);
 
