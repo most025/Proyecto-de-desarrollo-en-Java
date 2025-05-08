@@ -190,6 +190,38 @@ public class Gui extends JFrame {
     }
 
     /******************************************** Metodos*************************************************/
+    private void eventosDelSistema() {
+        botonEnviar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guardadoDeDatos();
+            }
+        });
+        botonMostrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarDatos();
+            }
+        });
+
+        listadoDeOpciones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarAsientos();
+
+            }
+        });
+
+        listadoDeOpciones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (listadoDeOpciones.getSelectedItem().equals("Selecciona una opción")) {
+                    listadoDeOpciones.setSelectedIndex(1);
+                }
+            }
+        });
+    }
+
     public void guardadoDeDatos() {
         configuracionDePersonalizacion();
         // Se encargan de extraer los datos de los campos del formulario.
@@ -294,38 +326,6 @@ public class Gui extends JFrame {
         UIManager.put("Button.border", BorderFactory.createEmptyBorder(5, 10, 5, 10));
         UIManager.put("Button.focus", new Color(0, 0, 0, 0));
         UIManager.put("Button.font", new Font("Roboto", Font.PLAIN, 14));
-    }
-
-    private void eventosDelSistema() {
-        botonEnviar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                guardadoDeDatos();
-            }
-        });
-        botonMostrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mostrarDatos();
-            }
-        });
-
-        listadoDeOpciones.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizarAsientos();
-
-            }
-        });
-
-        listadoDeOpciones.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (listadoDeOpciones.getSelectedItem().equals("Selecciona una opción")) {
-                    listadoDeOpciones.setSelectedIndex(1);
-                }
-            }
-        });
     }
 
     private void creacion_Del_Archivo_De_Guardado(String nombre, String edad, String tipoDeEntrada,
