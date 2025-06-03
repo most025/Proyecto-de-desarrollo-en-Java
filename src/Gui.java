@@ -6,9 +6,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+// import java.io.File;
+// import java.io.FileWriter;
+// import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
@@ -23,15 +23,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import database.Conexion;
+import java.sql.*;
+
 public class Gui extends JFrame {
-    /******************************************** Variables Globales*************************************************/
+    /********************************************* Variables Globales*************************************************/
     private JTextField campoNombre;
     private JTextField campoEdad;
     private JComboBox<String> listadoDeOpciones;
     private JCheckBox[][] asientos;
     private JButton botonEnviar;
     private JButton botonMostrar;
-    private File carpetaDeGuardadado;
+    // private File carpetaDeGuardadado;
+    Conexion conectarBD = Conexion.getInstancia();
 
     // ---------------------------------------------------------------------------------------------------------------------
     public Gui() {
@@ -189,7 +193,7 @@ public class Gui extends JFrame {
         eventosDelSistema();
     }
 
-    /****************************************** Métodos*************************************************/
+    /******************************************* Métodos *************************************************/
     private void eventosDelSistema() {
         botonEnviar.addActionListener(new ActionListener() {
             @Override
@@ -224,29 +228,52 @@ public class Gui extends JFrame {
 
     public void guardadoDeDatos() {
         configuracionDePersonalizacion();
-        // Se encargan de extraer los datos de los campos del formulario.
         String nombre = campoNombre.getText();
         String edad = campoEdad.getText();
         String tipoEntrada = (String) listadoDeOpciones.getSelectedItem();
-        String asientoDeSalaSelecciionado = obtencionDeasientosSeleccionados();
-
-        // si las casillas del formulario estan vacias al enviar se ejcutara el siguiente bloque de codigo.
-        if (nombre.isEmpty() && edad.isEmpty() && asientoDeSalaSelecciionado.length() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos del formulario.");
+        // String asientoDeSalaSelecciionado = obtencionDeasientosSeleccionados();
+        if (nombre.isEmpty() || edad.isEmpty() || tipoEntrada.equals("Selecciona una opción")) {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos requeridos.");
             return;
-            //si las casillas del formulario no estan vacias se ejecura el codigo de aca abajo.
-        } else if (!nombre.isEmpty() && !edad.isEmpty() && asientoDeSalaSelecciionado.length() != 0) {
-            creacion_Del_Archivo_De_Guardado(nombre, edad, tipoEntrada, asientoDeSalaSelecciionado);
+        }
 
-            JOptionPane.showMessageDialog(this, "Datos guardados exitosamente");
+        Connection conexion = null;
+        PreparedStatement prepararConsulta = null;
+
+        try {
+            // Conexion a la base de datos.
+            conexion = conectarBD.ConectarBD();
+            String sql = "INSERT INTO saladecine(nombre,edad,tipo_entrada) VALUES(?,?,?)";
+            prepararConsulta = conexion.prepareStatement(sql);
+
+            // Asignar los valores a la consulta.
+            prepararConsulta.setString(1, nombre);
+            prepararConsulta.setInt(2, Integer.parseInt(edad));
+            prepararConsulta.setString(3, tipoEntrada);
+
+            // Ejecutar la consulta.
+            prepararConsulta.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Se han guardado los datos correctamente");
             campoNombre.setText("");
             campoEdad.setText("");
             listadoDeOpciones.setSelectedIndex(0);
-            actualizarAsientos();
-        }else{
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos del formulario.");
-            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar los datos " + e);
+        }finally{
+            try {
+                if (prepararConsulta != null) {
+                    prepararConsulta.close();
+                    if(conexion != null){
+                        conexion.close();
+                    } 
+                }
+
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,"Error en el cierre de conexion " +ex.getMessage());
+            }
         }
+        
     }
 
     private void mostrarDatos() {
@@ -328,37 +355,17 @@ public class Gui extends JFrame {
         UIManager.put("Button.font", new Font("Roboto", Font.PLAIN, 14));
     }
 
-    private void creacion_Del_Archivo_De_Guardado(String nombre, String edad, String tipoDeEntrada,
-            String asientosDeSalaSeleccionado) {
-        carpetaDeGuardadado = new File("Sistema-de-Entrada-de-cine/Datos-Guardados");
-        carpetaDeGuardadado.mkdirs();
-        if (carpetaDeGuardadado.exists()) {
-            try {
-                FileWriter archivoDeTexto = new FileWriter(
-                        "Sistema-de-Entrada-de-cine/Datos-Guardados/Reserva-de-entrada.txt", true);
-                archivoDeTexto.write("Nombre: " + nombre + "\n");
-                archivoDeTexto.write("Edad: " + edad + "\n");
-                archivoDeTexto.write("Tipo de entrada: " + tipoDeEntrada + "\n");
-                archivoDeTexto.write("Nro de asiento de la sala: " + asientosDeSalaSeleccionado + "\n");
-                archivoDeTexto.write("------------------------------------------\n");
-                archivoDeTexto.close();
-            } catch (IOException excepcion) {
-                JOptionPane.showMessageDialog(null, "Error en la cración del archivo");
-            }
-        }
 
-    }
+    // private String obtencionDeasientosSeleccionados() {
+    // StringBuilder asientosSeleccionados = new StringBuilder();
+    // for (int i = 0; i < 10; i++) {
+    // for (int j = 0; j < 10; j++) {
+    // if (asientos[i][j].isSelected()) {
+    // asientosSeleccionados.append((char) ('A' + i)).append(j + 1).append(",");
+    // }
+    // }
+    // }
+    // return asientosSeleccionados.toString();
 
-    private String obtencionDeasientosSeleccionados() {
-        StringBuilder asientosSeleccionados = new StringBuilder();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (asientos[i][j].isSelected()) {
-                    asientosSeleccionados.append((char) ('A' + i)).append(j + 1).append(",");
-                }
-            }
-        }
-        return asientosSeleccionados.toString();
-
-    }
+    // }
 }
