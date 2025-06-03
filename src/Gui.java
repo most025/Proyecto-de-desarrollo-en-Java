@@ -189,7 +189,7 @@ public class Gui extends JFrame {
         eventosDelSistema();
     }
 
-    /******************************************** Métodos*************************************************/
+    /****************************************** Métodos*************************************************/
     private void eventosDelSistema() {
         botonEnviar.addActionListener(new ActionListener() {
             @Override
