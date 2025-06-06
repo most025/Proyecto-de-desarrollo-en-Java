@@ -11,7 +11,7 @@ public class Conexion {
  
     private static Connection conexion;
     private static Conexion instancia;
-    private static final String URL ="jdbc:mysql://localhost/entrada-cine";
+    private static final String URL ="jdbc:mysql://localhost/sistema-entrada";
     private static final String USER="root";
     private static final String PASSWORD="";
     

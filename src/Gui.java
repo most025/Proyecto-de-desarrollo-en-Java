@@ -6,9 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// import java.io.File;
-// import java.io.FileWriter;
-// import java.io.IOException;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
@@ -34,7 +32,6 @@ public class Gui extends JFrame {
     private JCheckBox[][] asientos;
     private JButton botonEnviar;
     private JButton botonMostrar;
-    // private File carpetaDeGuardadado;
     Conexion conectarBD = Conexion.getInstancia();
 
     // ---------------------------------------------------------------------------------------------------------------------
@@ -231,7 +228,7 @@ public class Gui extends JFrame {
         String nombre = campoNombre.getText();
         String edad = campoEdad.getText();
         String tipoEntrada = (String) listadoDeOpciones.getSelectedItem();
-        // String asientoDeSalaSelecciionado = obtencionDeasientosSeleccionados();
+        String asientoDeSalaSelecciionado = obtencionDeasientosSeleccionados();
         if (nombre.isEmpty() || edad.isEmpty() || tipoEntrada.equals("Selecciona una opción")) {
             JOptionPane.showMessageDialog(this, "Por favor complete todos los campos requeridos.");
             return;
@@ -243,13 +240,14 @@ public class Gui extends JFrame {
         try {
             // Conexion a la base de datos.
             conexion = conectarBD.ConectarBD();
-            String sql = "INSERT INTO saladecine(nombre,edad,tipo_entrada) VALUES(?,?,?)";
+            String sql = "INSERT INTO saladecine(nombre,edad,tipo_entrada,asientos) VALUES(?,?,?,?)";
             prepararConsulta = conexion.prepareStatement(sql);
 
             // Asignar los valores a la consulta.
             prepararConsulta.setString(1, nombre);
             prepararConsulta.setInt(2, Integer.parseInt(edad));
             prepararConsulta.setString(3, tipoEntrada);
+            prepararConsulta.setString(4, asientoDeSalaSelecciionado);
 
             // Ejecutar la consulta.
             prepararConsulta.executeUpdate();
@@ -356,16 +354,16 @@ public class Gui extends JFrame {
     }
 
 
-    // private String obtencionDeasientosSeleccionados() {
-    // StringBuilder asientosSeleccionados = new StringBuilder();
-    // for (int i = 0; i < 10; i++) {
-    // for (int j = 0; j < 10; j++) {
-    // if (asientos[i][j].isSelected()) {
-    // asientosSeleccionados.append((char) ('A' + i)).append(j + 1).append(",");
-    // }
-    // }
-    // }
-    // return asientosSeleccionados.toString();
+    private String obtencionDeasientosSeleccionados() {
+    StringBuilder asientosSeleccionados = new StringBuilder();
+    for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+    if (asientos[i][j].isSelected()) {
+    asientosSeleccionados.append((char) ('A' + i)).append(j + 1).append("");
+    }
+    }
+    }
+    return asientosSeleccionados.toString();
 
-    // }
+    }
 }
