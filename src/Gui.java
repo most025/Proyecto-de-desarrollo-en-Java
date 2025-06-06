@@ -275,6 +275,8 @@ public class Gui extends JFrame {
     }
 
     private void mostrarDatos() {
+        // Muy pronto se agregara una funcion a este método.
+        configuracionDePersonalizacion();
 
     }
 
