@@ -275,7 +275,9 @@ public class Gui extends JFrame {
     }
 
     private void mostrarDatos() {
-
+        configuracionDePersonalizacion();
+        Connection conexion= null;
+        PreparedStatement prepararConsulta=null;
     }
 
     private void actualizarAsientos() {
