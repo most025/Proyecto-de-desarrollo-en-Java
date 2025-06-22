@@ -14,11 +14,12 @@ public class Conexion {
     private static final String URL ="jdbc:mysql://localhost/sistema-entrada";
     private static final String USER="root";
     private static final String PASSWORD="";
+    private static final String DRIVER="com.mysql.cj.jdbc.Driver";
     
     //Creación del metodo para cconectarnos a la base de datos.
     public Connection ConectarBD(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(DRIVER);
             conexion= DriverManager.getConnection(URL, USER, PASSWORD);
             JOptionPane.showMessageDialog(null,"Conexión exitosa a la base de datos");
             return conexion;
