@@ -172,17 +172,19 @@ public class Gui extends JFrame {
         botonEnviar.setFont(new Font("Roboto", Font.BOLD, 18));
         Color colorEnviar = new Color(23, 80, 106);
         botonEnviar.setBackground(colorEnviar);
-        botonEnviar.setForeground(Color.WHITE);
+        Color colorFuenteEnviar = new Color(226,196,230);
+        botonEnviar.setForeground(colorFuenteEnviar);
         grid.gridx = 1;
         grid.gridy = 4;
         panelFormulario.add(botonEnviar, grid);
 
         // ***************************************Boton Mostrar*******************************************/
         botonMostrar = new JButton("Mostrar Datos");
-        Color customColor = new Color(52, 81, 58);
+        Color customColor = new Color(45, 13, 67);
         botonMostrar.setBackground(customColor);
         botonMostrar.setFont(new Font("Roboto", Font.BOLD, 18));
-        botonMostrar.setForeground(Color.WHITE);
+        Color colorFuente= new Color(226,196,230);
+        botonMostrar.setForeground(colorFuente);
         grid.gridx = 1;
         grid.gridy = 5;
         panelFormulario.add(botonMostrar, grid);
@@ -276,8 +278,6 @@ public class Gui extends JFrame {
 
     private void mostrarDatos() {
         configuracionDePersonalizacion();
-        Connection conexion= null;
-        PreparedStatement prepararConsulta=null;
     }
 
     private void actualizarAsientos() {
