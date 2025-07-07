@@ -3,6 +3,10 @@ public abstract class Entrada {
     public String asiento;
     public static final double PRECIO=1600;
 
+    public Entrada(){
+        
+    }
+
     public Entrada(String tipo, String asiento) {
         this.tipo = tipo;
         this.asiento = asiento;

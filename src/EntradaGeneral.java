@@ -9,6 +9,8 @@ import database.Conexion;
 public class EntradaGeneral extends Entrada {
     Conexion conectarBD= Conexion.getInstancia();
 
+    public EntradaGeneral(){
+    }
 
     public EntradaGeneral(String tipo,String asiento){
         super(tipo, asiento);
@@ -26,15 +28,15 @@ public class EntradaGeneral extends Entrada {
         PreparedStatement prepararConsulta=null;
         try {
             conexion= conectarBD.ConectarBD();
-            String sql="SELECT * FROM salaDeCine WHERE tipo_entraada='Entrada General'";
+            String sql="SELECT * FROM salaDeCine WHERE tipo_entrada='Entrada General'";
             prepararConsulta= conexion.prepareStatement(sql);
             ResultSet consulta= prepararConsulta.executeQuery();
             StringBuilder informacion= new StringBuilder();
             while(consulta.next()){
                 String nombre= consulta.getString("nombre");
                 String edad = consulta.getString("edad");
-                String entradas=consulta.getString("tipo_entraada");
-                String asiento= consulta.getString("asiento");
+                String entradas=consulta.getString("tipo_entrada");
+                String asiento= consulta.getString("asientos");
                 // imprimir los datos extraidos de la tabla sala_cine.
                 informacion.append("Nombre: ").append(nombre).append("\n")
                             .append("Edad: ").append(edad).append("\n")

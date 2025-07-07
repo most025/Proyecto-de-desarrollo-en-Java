@@ -1,5 +1,9 @@
 public class EntradaVip extends Entrada{
 
+public EntradaVip(){
+
+}
+
 public EntradaVip(String tipo, String asiento){
     super(tipo, asiento);
 }

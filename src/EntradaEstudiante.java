@@ -1,5 +1,9 @@
 public class EntradaEstudiante extends EntradaGeneral {
 
+    public EntradaEstudiante(){
+        
+    }
+
     public EntradaEstudiante(String tipo, String asiento) {
         super(tipo, asiento);
     }
