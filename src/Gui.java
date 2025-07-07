@@ -279,7 +279,11 @@ public class Gui extends JFrame {
     private void mostrarDatos() {
         configuracionDePersonalizacion();
         EntradaGeneral entradaGeneral = new EntradaGeneral();
-        entradaGeneral.generarAsiento();   
+        EntradaVip entradaVip = new EntradaVip();
+        EntradaEstudiante entradaEstudiante = new EntradaEstudiante();
+        entradaGeneral.generarAsiento();
+        entradaVip.generarAsiento();
+        entradaEstudiante.generarAsiento();
     
     }
 
