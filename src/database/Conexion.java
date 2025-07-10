@@ -21,7 +21,7 @@ public class Conexion {
         try {
             Class.forName(DRIVER);
             conexion= DriverManager.getConnection(URL, USER, PASSWORD);
-            JOptionPane.showMessageDialog(null,"Conexión exitosa a la base de datos");
+            // JOptionPane.showMessageDialog(null,"Conexión exitosa a la base de datos");
             return conexion;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Error:"+e);

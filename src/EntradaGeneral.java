@@ -47,13 +47,21 @@ public class EntradaGeneral extends Entrada {
             if (informacion.length()>0) {
                 JOptionPane.showMessageDialog(null, informacion.toString());
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos para mostrar.");   
-                
+                JOptionPane.showMessageDialog(null, "No se encontraron datos para mostrar.");    
+            } 
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al Extraer los datos: " + ex.getMessage());
+        }finally{
+            try {
+                if (prepararConsulta != null) {
+                    prepararConsulta.close();
+                    if (conexion != null) {
+                        conexion.close();
+                    }
+                }
+            } catch (Exception excepcion) {
+                JOptionPane.showMessageDialog(null,"Error en el cierre de la conexion con la base de datos "+ excepcion.getMessage());
             }
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al Extraer los datos: " + e.getMessage());
         }
 
         

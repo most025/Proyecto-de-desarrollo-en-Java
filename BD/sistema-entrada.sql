@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2025 a las 04:30:46
+-- Tiempo de generación: 10-07-2025 a las 20:28:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,14 +40,14 @@ CREATE TABLE `saladecine` (
 --
 
 INSERT INTO `saladecine` (`id`, `nombre`, `edad`, `tipo_entrada`, `asientos`) VALUES
-(1, 'f', 67, 'Entrada General', ''),
-(2, 'carlos', 21, 'Entrada para Estudiantes', ''),
-(3, 'Jose', 23, 'Entrada General', 'B3,'),
-(4, 'Maria', 16, 'Entrada para Estudiantes', 'B10,'),
+(1, 'Fabian', 67, 'Entrada General', 'A7'),
 (5, 'Pedro', 32, 'Entrada VIP', 'E7,'),
 (6, 'Karen', 22, 'Entrada para Estudiantes', 'C9'),
 (7, 'Flabia', 46, 'Entrada VIP', 'E3'),
-(8, 'Kevin', 26, 'Entrada para Estudiantes', 'A10');
+(8, 'Kevin', 26, 'Entrada para Estudiantes', 'A10'),
+(9, 'daniel', 22, 'Entrada para Estudiantes', 'G9'),
+(10, 'Jose maria', 21, 'Entrada General', 'H1'),
+(11, 'karina', 42, 'Entrada General', 'H4');
 
 --
 -- Índices para tablas volcadas
@@ -67,7 +67,7 @@ ALTER TABLE `saladecine`
 -- AUTO_INCREMENT de la tabla `saladecine`
 --
 ALTER TABLE `saladecine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
