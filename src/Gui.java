@@ -67,8 +67,8 @@ public class Gui extends JFrame {
         panelFormulario.add(etiquetanombre, grid);
 
         campoNombre = new JTextField(20);
-        Color colorCampo1 = new Color(250, 221, 204);
-        campoNombre.setBackground(colorCampo1);
+        Color colorCampoNombre = new Color(250, 221, 204);
+        campoNombre.setBackground(colorCampoNombre);
         campoNombre.setFont(new Font("Roboto", Font.PLAIN, 20));
         grid.gridx = 1;
         grid.gridy = 0;
@@ -82,8 +82,8 @@ public class Gui extends JFrame {
         panelFormulario.add(etiquetaEdad, grid);
 
         campoEdad = new JTextField(20);
-        Color colorCampo2 = new Color(250, 221, 204);
-        campoEdad.setBackground(colorCampo2);
+        Color colorCampoEdad = new Color(250, 221, 204);
+        campoEdad.setBackground(colorCampoEdad);
         campoEdad.setFont(new Font("Roboto", Font.PLAIN, 20));
         grid.gridx = 1;
         grid.gridy = 1;
