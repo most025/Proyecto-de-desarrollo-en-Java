@@ -59,12 +59,12 @@ public class Gui extends JFrame {
         grid.insets = new Insets(10, 10, 10, 10); // este metodo añade un padding.
         grid.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel etiquetanombre = new JLabel("Nombre");
-        etiquetanombre.setFont(new Font("Roboto", Font.PLAIN, 18));
-        etiquetanombre.setForeground(Color.BLACK);
+        JLabel etiquetaNombre = new JLabel("Nombre");
+        etiquetaNombre.setFont(new Font("Roboto", Font.PLAIN, 18));
+        etiquetaNombre.setForeground(Color.BLACK);
         grid.gridx = 0;
         grid.gridy = 0;
-        panelFormulario.add(etiquetanombre, grid);
+        panelFormulario.add(etiquetaNombre, grid);
 
         campoNombre = new JTextField(20);
         Color colorCampoNombre = new Color(250, 221, 204);
@@ -105,7 +105,7 @@ public class Gui extends JFrame {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
                     boolean cellHasFocus) {
-                Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                Component componente = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (value.equals("Selecciona una opción")) {
                     setEnabled(false);
                 } else if (value.equals("Entrada General")) {
@@ -118,7 +118,7 @@ public class Gui extends JFrame {
                     Color celestePersonalizado = new Color(189, 211, 206);
                     setBackground(celestePersonalizado);
                 }
-                return c;
+                return componente;
             }
         });
         grid.gridx = 1;
@@ -170,8 +170,8 @@ public class Gui extends JFrame {
         botonEnviar = new JButton();
         botonEnviar.setText("Enviar");
         botonEnviar.setFont(new Font("Roboto", Font.BOLD, 18));
-        Color colorEnviar = new Color(23, 80, 106);
-        botonEnviar.setBackground(colorEnviar);
+        Color colorBotonEnviar = new Color(23, 80, 106);
+        botonEnviar.setBackground(colorBotonEnviar);
         Color colorFuenteEnviar = new Color(226,196,230);
         botonEnviar.setForeground(colorFuenteEnviar);
         grid.gridx = 1;
@@ -180,11 +180,11 @@ public class Gui extends JFrame {
 
         // ***************************************Boton Mostrar*******************************************/
         botonMostrar = new JButton("Mostrar Datos");
-        Color customColor = new Color(45, 13, 67);
-        botonMostrar.setBackground(customColor);
+        Color colorBotonMostrar = new Color(45, 13, 67);
+        botonMostrar.setBackground(colorBotonMostrar);
         botonMostrar.setFont(new Font("Roboto", Font.BOLD, 18));
-        Color colorFuente= new Color(226,196,230);
-        botonMostrar.setForeground(colorFuente);
+        Color colorFuenteMostrar= new Color(226,196,230);
+        botonMostrar.setForeground(colorFuenteMostrar);
         grid.gridx = 1;
         grid.gridy = 5;
         panelFormulario.add(botonMostrar, grid);
