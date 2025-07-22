@@ -230,7 +230,7 @@ public class Gui extends JFrame {
         String nombre = campoNombre.getText();
         String edad = campoEdad.getText();
         String tipoEntrada = (String) listadoDeOpciones.getSelectedItem();
-        String asientoDeSalaSelecciionado = obtencionDeasientosSeleccionados();
+        String asientoDeSalaSeleccionado = obtencionDeasientosSeleccionados();
         if (nombre.isEmpty() || edad.isEmpty() || tipoEntrada.equals("Selecciona una opción")) {
             JOptionPane.showMessageDialog(this, "Por favor complete todos los campos requeridos.");
             return;
@@ -249,7 +249,7 @@ public class Gui extends JFrame {
             prepararConsulta.setString(1, nombre);
             prepararConsulta.setInt(2, Integer.parseInt(edad));
             prepararConsulta.setString(3, tipoEntrada);
-            prepararConsulta.setString(4, asientoDeSalaSelecciionado);
+            prepararConsulta.setString(4, asientoDeSalaSeleccionado);
 
             // Ejecutar la consulta.
             prepararConsulta.executeUpdate();
