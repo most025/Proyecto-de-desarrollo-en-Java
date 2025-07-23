@@ -31,21 +31,22 @@ public class EntradaGeneral extends Entrada {
             String sql="SELECT * FROM salaDeCine WHERE tipo_entrada='Entrada General'";
             prepararConsulta= conexion.prepareStatement(sql);
             ResultSet consulta= prepararConsulta.executeQuery();
-            StringBuilder informacion= new StringBuilder();
+            StringBuilder informacionDeLaBD= new StringBuilder();
             while(consulta.next()){
                 String nombre= consulta.getString("nombre");
                 String edad = consulta.getString("edad");
                 String entradas=consulta.getString("tipo_entrada");
                 String asiento= consulta.getString("asientos");
-                // imprimir los datos extraidos de la tabla sala_cine.
-                informacion.append("Nombre: ").append(nombre).append("\n")
+
+                // Construcción de la informacion que se va mostrar en carteles de mensaje.
+                informacionDeLaBD.append("Nombre: ").append(nombre).append("\n")
                             .append("Edad: ").append(edad).append("\n")
                             .append("Tipo de Entrada: ").append(entradas).append("\n")
                             .append("Asiento: ").append(asiento).append("\n")
                             .append("Precio: ").append(calcularPrecio()).append("\n\n");
             }
-            if (informacion.length()>0) {
-                JOptionPane.showMessageDialog(null, informacion.toString());
+            if (informacionDeLaBD.length()>0) {
+                JOptionPane.showMessageDialog(null, informacionDeLaBD.toString());
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos para mostrar.");    
             } 
