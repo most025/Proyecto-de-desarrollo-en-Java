@@ -166,7 +166,7 @@ public class Gui extends JFrame {
                 panelAsientos.add(asientos[i][j], asientoGrid);
             }
         }
-
+        //---------------------------------Boton Enviar----------------------------------------------------/
         botonEnviar = new JButton();
         botonEnviar.setText("Enviar");
         botonEnviar.setFont(new Font("Roboto", Font.BOLD, 18));
