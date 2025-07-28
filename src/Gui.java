@@ -225,7 +225,7 @@ public class Gui extends JFrame {
         });
     }
 
-    public void guardadoDeDatos() {
+    private void guardadoDeDatos() {
         configuracionDePersonalizacion();
         String nombre = campoNombre.getText();
         String edad = campoEdad.getText();
