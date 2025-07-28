@@ -32,6 +32,7 @@ public class Gui extends JFrame {
     private JCheckBox[][] asientos;
     private JButton botonEnviar;
     private JButton botonMostrar;
+    private JButton botonEliminar;
     Conexion conectarBD = Conexion.getInstancia();
 
     // ---------------------------------------------------------------------------------------------------------------------
@@ -188,6 +189,21 @@ public class Gui extends JFrame {
         grid.gridx = 1;
         grid.gridy = 5;
         panelFormulario.add(botonMostrar, grid);
+
+        // **************Botón Eliminar**************/
+        botonEliminar = new JButton("Eliminar");
+        // Rojo intenso de fondo
+        Color colorBotonEliminar = new Color(165, 0, 0);
+        botonEliminar.setBackground(colorBotonEliminar);
+        botonEliminar.setFont(new Font("Roboto", Font.BOLD, 18));
+        // Texto claro para buen contraste
+        Color colorFuenteEliminar = new Color(255, 230, 230);
+        botonEliminar.setForeground(colorFuenteEliminar);
+
+        // Posicionamiento con GridBagConstraints
+        grid.gridx = 1;
+        grid.gridy = 6;  // siguiente fila
+        panelFormulario.add(botonEliminar, grid);
         // **************************************EVENTOS***************************************************/
         eventosDelSistema();
     }
