@@ -7,7 +7,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
@@ -167,13 +166,13 @@ public class Gui extends JFrame {
                 panelAsientos.add(asientos[i][j], asientoGrid);
             }
         }
-        //---------------------------------Boton Enviar----------------------------------------------------/
+        // ---------------------------------Boton Enviar----------------------------------------------------/
         botonEnviar = new JButton();
         botonEnviar.setText("Enviar");
         botonEnviar.setFont(new Font("Roboto", Font.BOLD, 18));
         Color colorBotonEnviar = new Color(23, 80, 106);
         botonEnviar.setBackground(colorBotonEnviar);
-        Color colorFuenteEnviar = new Color(226,196,230);
+        Color colorFuenteEnviar = new Color(226, 196, 230);
         botonEnviar.setForeground(colorFuenteEnviar);
         grid.gridx = 1;
         grid.gridy = 4;
@@ -184,7 +183,7 @@ public class Gui extends JFrame {
         Color colorBotonMostrar = new Color(45, 13, 67);
         botonMostrar.setBackground(colorBotonMostrar);
         botonMostrar.setFont(new Font("Roboto", Font.BOLD, 18));
-        Color colorFuenteMostrar= new Color(226,196,230);
+        Color colorFuenteMostrar = new Color(226, 196, 230);
         botonMostrar.setForeground(colorFuenteMostrar);
         grid.gridx = 1;
         grid.gridy = 5;
@@ -193,7 +192,7 @@ public class Gui extends JFrame {
         // **************Botón Eliminar**************/
         botonEliminar = new JButton("Eliminar");
         // Rojo intenso de fondo
-        Color colorBotonEliminar = new Color(165, 0, 0);
+        Color colorBotonEliminar = new Color(99, 0, 0);
         botonEliminar.setBackground(colorBotonEliminar);
         botonEliminar.setFont(new Font("Roboto", Font.BOLD, 18));
         // Texto claro para buen contraste
@@ -202,13 +201,13 @@ public class Gui extends JFrame {
 
         // Posicionamiento con GridBagConstraints
         grid.gridx = 1;
-        grid.gridy = 6;  // siguiente fila
+        grid.gridy = 6; // siguiente fila
         panelFormulario.add(botonEliminar, grid);
         // **************************************EVENTOS***************************************************/
         eventosDelSistema();
     }
 
-    /******************************************* Métodos *************************************************/
+    /********************************************Métodos*************************************************/
     private void eventosDelSistema() {
         botonEnviar.addActionListener(new ActionListener() {
             @Override
@@ -220,6 +219,13 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mostrarDatos();
+            }
+        });
+
+        botonEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                eliminarRegistros();
             }
         });
 
@@ -275,21 +281,20 @@ public class Gui extends JFrame {
             listadoDeOpciones.setSelectedIndex(0);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar los datos " + e);
-        }finally{
+        } finally {
             try {
                 if (prepararConsulta != null) {
                     prepararConsulta.close();
-                    if(conexion != null){
+                    if (conexion != null) {
                         conexion.close();
-                    } 
+                    }
                 }
 
-                
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this,"Error en el cierre de conexion " +ex.getMessage());
+                JOptionPane.showMessageDialog(this, "Error en el cierre de conexion " + ex.getMessage());
             }
         }
-        
+
     }
 
     private void mostrarDatos() {
@@ -300,10 +305,13 @@ public class Gui extends JFrame {
         entradaGeneral.generarAsiento();
         entradaVip.generarAsiento();
         entradaEstudiante.generarAsiento();
-    
+
     }
 
     private void actualizarAsientos() {
+        // ------------variables locales del método------------------------------
+        // String sql = "SELECT asientos FROM saladecine";
+        // -----------------------------------------------------------------------
         String opcion = (String) listadoDeOpciones.getSelectedItem();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -378,17 +386,31 @@ public class Gui extends JFrame {
         UIManager.put("Button.font", new Font("Roboto", Font.PLAIN, 14));
     }
 
-
     private String obtencionDeasientosSeleccionados() {
-    StringBuilder asientosSeleccionados = new StringBuilder();
-    for (int i = 0; i < 10; i++) {
-    for (int j = 0; j < 10; j++) {
-    if (asientos[i][j].isSelected()) {
-    asientosSeleccionados.append((char) ('A' + i)).append(j + 1).append("");
-    }
-    }
-    }
-    return asientosSeleccionados.toString();
+        StringBuilder asientosSeleccionados = new StringBuilder();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (asientos[i][j].isSelected()) {
+                    asientosSeleccionados.append((char) ('A' + i)).append(j + 1).append(",");
+                }
+            }
+        }
+        return asientosSeleccionados.toString();
 
+    }
+
+    private void eliminarRegistros() {
+        configuracionDePersonalizacion();
+        String sql = "TRUNCATE TABLE salaDeCine";
+
+        try {
+            Connection conexion = conectarBD.ConectarBD();
+            PreparedStatement prepararConsuta = conexion.prepareStatement(sql);
+            prepararConsuta.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Todos los registros han sido eliminados");
+        } catch (Exception exception) {
+            JOptionPane.showMessageDialog(null,
+                    "Ha habido un error al eliminar los registros" + exception.getMessage());
+        }
     }
 }
