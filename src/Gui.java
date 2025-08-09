@@ -131,7 +131,7 @@ public class Gui extends JFrame {
         grid.gridx = 0;
         grid.gridy = 3;
         panelFormulario.add(etiquetaSalas, grid);
-
+//------------------------Panel de asientos -----------------------------------------------------------------
         JPanel panelAsientos = new JPanel(new GridBagLayout());
         Color colorPanel = new Color(223, 180, 148);
         panelAsientos.setBackground(colorPanel);
@@ -371,7 +371,7 @@ public class Gui extends JFrame {
             }
 
         }
-
+        desabilitarAsientosOcupados();
     }
 
     private void configuracionDePersonalizacion() {
@@ -408,9 +408,38 @@ public class Gui extends JFrame {
             PreparedStatement prepararConsuta = conexion.prepareStatement(sql);
             prepararConsuta.executeUpdate();
             JOptionPane.showMessageDialog(null, "Todos los registros han sido eliminados");
+            listadoDeOpciones.setSelectedIndex(0);
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(null,
                     "Ha habido un error al eliminar los registros" + exception.getMessage());
         }
     }
+
+    private void desabilitarAsientosOcupados(){
+        String sql ="SELECT asientos FROM salaDeCine";
+        try {
+            //Se establese la conexion a la base de datos.
+            Connection conexion = conectarBD.ConectarBD();
+            PreparedStatement prepararConsulta= conexion.prepareStatement(sql);
+            ResultSet resultado = prepararConsulta.executeQuery();
+            while (resultado.next()) {
+                String asientosOcupados= resultado.getString("asientos");
+                if (asientosOcupados != null && !asientosOcupados.isEmpty()) {
+                    String[]listadoDeAsientos=asientosOcupados.split(",");
+                    for (String asiento : listadoDeAsientos) {
+                        asiento=asiento.trim();
+                        int fila = asiento.charAt(0) - 'A'; // Convertir letra a índice (A=0, B=1, etc)
+                        int columna = Integer.parseInt(asiento.substring(1)) - 1; // Convertir número a índice
+                        asientos[fila][columna].setEnabled(false);
+                    }
+                }
+                
+            }
+
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
+    //--------------------------------------------------------------------------------------------------------
 }
